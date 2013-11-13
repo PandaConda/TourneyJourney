@@ -1,0 +1,4 @@
+enum Mode {
+  STANDING, DUCKING, MOVING
+}
+
