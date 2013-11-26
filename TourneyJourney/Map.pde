@@ -1,11 +1,14 @@
 class Map {
+  int level = 1;
   Tile[][] tiles;
   boolean gravity;
+  boolean slowtime;
   
   // Constructor
   Map() {
-    loadTiles(1);
-    gravity = false;
+    this.loadTiles(this.level);
+    this.gravity = true;
+    this.slowtime = false;
   }
   
   // load the tiles from a file into an array
@@ -60,11 +63,21 @@ class Map {
     final int t_width = map.tiles[0][0].image.width;
     final int t_height = map.tiles[0][0].image.height;
     
+
     // render tilemap
     for (int i = ((camera.y - (height / 2)) / t_height) - 1;
       i <= (camera.y + (height / 2)) / t_height; i++) {
       for (int j = ((camera.x - (width / 2)) / t_width) - 1;
         j <= (camera.x + (width / 2)) / t_width; j++) {
+  
+        if (this.slowtime == true) {
+          if (tiles[(i + map.tiles.length) % map.tiles.length]
+          [(j + map.tiles[0].length) % map.tiles[0].length].passable == true)
+            tint(255, 15);
+          else
+            tint(126, 126);
+        }
+                  
         image(tiles[(i + map.tiles.length) % map.tiles.length]
           [(j + map.tiles[0].length) % map.tiles[0].length].image,
           left + (j * t_width),
@@ -75,19 +88,38 @@ class Map {
   
   // turn gravity on or off
   void flipGravity() {
-    this.gravity = !this.gravity;
-    player.yspd = player.base_yspd;
-    if (player.yd == YDir.DOWN) {
-      if (w_pressed && !s_pressed) {
-        player.yd = YDir.UP;
-        player.yv = -1;
-      } else if (s_pressed && !w_pressed) {
-        player.yd = YDir.DOWN;
-        player.yv = 1;
-      } else {
-        player.yd = YDir.CENTER;
-        player.yv = 0;
+    if (!(this.gravity == false && player.real_gp == 0)) {
+      this.gravity = !this.gravity;
+      player.yspd = player.base_yspd;
+      if (player.yd != YDir.CENTER) {
+        if (w_pressed && !s_pressed) {
+          player.yd = YDir.UP;
+          player.yv = -1;
+        } else if (s_pressed && !w_pressed) {
+          player.yd = YDir.DOWN;
+          player.yv = 1;
+        } else {
+          player.yd = YDir.CENTER;
+          player.yv = 0;
+        }
       }
     }
+  }
+  
+  // change the rate at which time changes
+  void changeTimeSpeed() {
+    this.slowtime = !this.slowtime;
+    if (slowtime) {
+//      frameRate(30);  
+      loadPixels();
+      for (int i = 0; i < width * height; i++)
+        pixels[i] = color(0, 0, 0, 255);
+      updatePixels();
+    } else {
+//      frameRate(60);
+    }
+    
+
+    
   }
 }

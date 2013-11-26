@@ -2,23 +2,26 @@ private static boolean w_pressed = false;
 private static boolean a_pressed = false;
 private static boolean s_pressed = false;
 private static boolean d_pressed = false;
+private static boolean t_pressed = false;
 
 void keyPressed() {
   if (player.stun_timer == 0) {
     switch (key) {
       // moving
-      case 'w': pressUp(); return;
-      case 'a': pressLeft(); return;
-      case 's': pressDown(); return;
-      case 'd': pressRight(); return;
+      case 'w': case 'W': pressUp(); return;
+      case 'a': case 'A': pressLeft(); return;
+      case 's': case 'S': pressDown(); return;
+      case 'd': case 'D': pressRight(); return;
       case CODED: // arrow keys
         switch(keyCode) {
           case UP: pressUp(); return;
           case LEFT: pressLeft(); return;
           case DOWN: pressDown(); return;
           case RIGHT: pressRight(); return;
+          default: return;
         }
-      case 'g': map.flipGravity(); return;
+      case 'g': case 'G': map.flipGravity(); return;
+      case 't': case 'T': map.changeTimeSpeed(); return;
     }
   }
 }
@@ -27,19 +30,20 @@ void keyReleased() {
   if (player.stun_timer == 0) {
     switch (key) {
       // moving
-      case 'w': releaseUp(); return;
-      case 'a': releaseLeft(); return;
-      case 's': releaseDown(); return;
-      case 'd': releaseRight(); return;
+      case 'w': case 'W': releaseUp(); return;
+      case 'a': case 'A': releaseLeft(); return;
+      case 's': case 'S': releaseDown(); return;
+      case 'd': case 'D': releaseRight(); return;
       case CODED: // arrow keys
         switch(keyCode) {
           case UP: releaseUp(); return;
           case LEFT: releaseLeft(); return;
           case DOWN: releaseDown(); return;
           case RIGHT: releaseRight(); return;
+          default: return;
         }
-      case 'q': return; // TODO switch to left equip
-      case 'e': return; // TODO switch to right equip
+      case 'q': case 'Q': return; // TODO switch to left equip
+      case 'e': case 'E': return; // TODO switch to right equip
       case ' ': return; // TODO use current equip
     }
   }
@@ -64,14 +68,18 @@ private void releaseUp() {
 
 private void pressLeft() {
   a_pressed = true;
-  player.xd = XDir.LEFT;
-  player.xv = -1;
+  if (player.walljump == true) {
+    player.xd = XDir.LEFT;
+    player.xv = -1;
+  }
 }
 
 private void releaseLeft() {
   a_pressed = false;
-  if (d_pressed) player.xv = 1;
-  else player.xv = 0;
+  if (player.walljump == true) {
+    if (d_pressed) player.xv = 1;
+    else player.xv = 0;
+  }
 }
 
 private void pressDown() {
@@ -96,13 +104,17 @@ private void releaseDown() {
 
 private void pressRight() {
   d_pressed = true;
-  player.xd = XDir.RIGHT;
-  player.xv = 1;
+  if (player.walljump == true) {
+    player.xd = XDir.RIGHT;
+    player.xv = 1;
+  }
 }
 
 private void releaseRight() {
   d_pressed = false;
-  if (a_pressed) player.xv = -1;
-  else player.xv = 0;
+  if (player.walljump == true) {
+    if (a_pressed) player.xv = -1;
+    else player.xv = 0;
+  }
 }
 

@@ -35,7 +35,7 @@ class Camera {
     } else if (this.x < player.x) {
       this.x += (log(player.x - this.x) / player.xspd) + 1;
     } else if (this.x > player.x) {
-      this.x -= (log(this.x - player.x) / player.xspd) + 1;
+      this.x -= ((log(this.x - player.x) / player.xspd) * (2 / 3)) + 1;
     }
     this.x = (this.x + (map.tiles[0].length * map.tiles[0][0].image.width)) % (map.tiles[0].length * map.tiles[0][0].image.width);
 
@@ -58,7 +58,7 @@ class Camera {
     } else if (this.y < player.y) {
       this.y += (log(player.y - this.y) / player.yspd) + 1;
     } else if (this.y > player.y) {
-      this.y -= (log(this.y - player.y) / player.yspd) + 1;
+      this.y -= ((log(this.y - player.y) / player.yspd) * (2 / 3)) + 1;
     }
     this.y = (this.y + (map.tiles.length * map.tiles[0][0].image.height)) % (map.tiles.length * map.tiles[0][0].image.height);
   }
