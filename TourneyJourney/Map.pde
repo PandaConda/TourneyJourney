@@ -3,12 +3,14 @@ class Map {
   Tile[][] tiles;
   boolean gravity;
   boolean slowtime;
+  boolean paused;
   
   // Constructor
   Map() {
     this.loadTiles(this.level);
     this.gravity = true;
     this.slowtime = false;
+    this.paused = false;
   }
   
   // load the tiles from a file into an array
@@ -88,7 +90,7 @@ class Map {
   
   // turn gravity on or off
   void flipGravity() {
-    if (!(this.gravity == false && player.real_gp == 0)) {
+    if (!(this.gravity == true && player.real_gp == 0)) {
       this.gravity = !this.gravity;
       player.yspd = player.base_yspd;
       if (player.yd != YDir.CENTER) {
@@ -108,18 +110,14 @@ class Map {
   
   // change the rate at which time changes
   void changeTimeSpeed() {
-    this.slowtime = !this.slowtime;
-    if (slowtime) {
-//      frameRate(30);  
-      loadPixels();
-      for (int i = 0; i < width * height; i++)
-        pixels[i] = color(0, 0, 0, 255);
-      updatePixels();
-    } else {
-//      frameRate(60);
+    if (!(this.slowtime == false && player.real_tp == 0)) {
+      this.slowtime = !this.slowtime;
+      if (slowtime) {
+        loadPixels();
+        for (int i = 0; i < width * height; i++)
+          pixels[i] = color(0, 0, 0, 255);
+        updatePixels();
+      }
     }
-    
-
-    
   }
 }
