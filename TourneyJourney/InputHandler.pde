@@ -5,7 +5,7 @@ private static boolean d_pressed = false;
 private static boolean t_pressed = false;
 
 void keyPressed() {
-  if (player.stun_timer == 0) {
+  if (player.stun_timer == 0 && (map.paused == false || key == 'p' || key == 'P')) {
     switch (key) {
       // moving
       case 'w': case 'W': pressUp(); return;
@@ -22,6 +22,7 @@ void keyPressed() {
         }
       case 'g': case 'G': map.flipGravity(); return;
       case 't': case 'T': map.changeTimeSpeed(); return;
+      case 'p': case 'P': map.paused = !map.paused; return;
     }
   }
 }

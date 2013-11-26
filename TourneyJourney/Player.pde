@@ -54,7 +54,7 @@ class Player {
 
     this.real_hp = this.fake_hp = this.max_hp = 9999;
     this.real_tp = this.fake_tp = this.max_tp = 500;
-    this.real_tp = this.fake_tp = this.max_tp = 500;
+    this.real_gp = this.fake_gp = this.max_gp = 500;
     this.kp = 1234;
 
     this.jmp = (int)(this.h * 1.3);
@@ -236,9 +236,20 @@ class Player {
     if (this.hp_pause > 0)
       this.hp_pause--;
       
-    if (map.gravity == false && this.real_tp > 0)
-      if (--this.real_tp == 0)
+    if (map.gravity == false)
+      if (--this.real_gp == 0)
         map.flipGravity();
+    
+    if (this.fake_gp > this.real_gp)
+      for (int i = 0; i <= (int)log(this.fake_gp - this.real_gp); i++)
+        this.fake_gp--;
+    else if (this.fake_gp < this.real_gp)
+      for (int i = 0; i <= (int)log(this.real_gp - this.fake_gp); i++)
+        this.fake_gp++;
+        
+    if (map.slowtime == true)
+      if (--this.real_tp == 0)
+        map.changeTimeSpeed();
     
     if (this.fake_tp > this.real_tp)
       for (int i = 0; i <= (int)log(this.fake_tp - this.real_tp); i++)

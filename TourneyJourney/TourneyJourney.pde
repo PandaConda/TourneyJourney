@@ -19,15 +19,16 @@ void setup() {
 
 // render stuff on screen
 void draw() {
-
-  player.move();
-  camera.move();
-  map.draw();
-  player.draw();
-  
-  //for (monster : monsters) monster.draw();
-  //for (item : items) item.draw();
-  hud.draw();
+  if (map.paused == false) {
+    player.move();
+    camera.move();
+    map.draw();
+    player.draw();
+    
+    //for (monster : monsters) monster.draw();
+    //for (item : items) item.draw();
+    hud.draw();
+  }
 }
 
 //enable fullscreen mode
