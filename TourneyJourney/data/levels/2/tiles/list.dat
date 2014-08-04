@@ -1,0 +1,24 @@
+23
+transparent, true, false, false, a
+door, true, false, true, b
+cobblestone_center, false, false, false, c
+cobblestone_left, false, false, false, d
+cobblestone_right, false, false, false, e
+cobblestone_top, false, false, false, f
+cobblestone_bottom, false, false, false, g
+cobblestone_top_left_in, false, false, false, h
+cobblestone_top_left_out, false, false, false, i
+cobblestone_top_right_in, false, false, false, j
+cobblestone_top_right_out, false, false, false, k
+cobblestone_bottom_left_in, false, false, false, l
+cobblestone_bottom_left_out, false, false, false, m
+cobblestone_bottom_right_in, false, false, false, n
+cobblestone_bottom_right_out, false, false, false, o
+cobblestone_back, true, false, false, p
+water_top, true, true, false, q
+water_center, true, true, false, r
+dirt, false, false, false, s
+crate, false, false, false, t
+portrait, true, false, false, u
+cobblestone_single, false, false, false, v
+sign, true, false, false, w
