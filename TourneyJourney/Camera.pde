@@ -1,3 +1,4 @@
+// The camera is used to determine where the center of the screen is
 class Camera {
   int x, y;  // camera coordinates
   final int max_x_distance; // max x distance from the player

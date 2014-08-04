@@ -1,3 +1,4 @@
+// Code for handling collision detection between the player/monsters and tiles
 // detect tile collisions in response to horizontal movement
 boolean horizontalTileCollision(int x, int y, int w, int h, int xv) {
   // this prevents modding negative numbers
