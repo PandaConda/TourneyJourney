@@ -5,13 +5,17 @@ private static boolean d_pressed = false;
 private static boolean t_pressed = false;
 
 void keyPressed() {
-  if (player.stun_timer == 0 && (map.paused == false || key == 'p' || key == 'P')) {
+  if (player.mode != Mode.DEAD && player.stun_timer == 0 && (map.paused == false || key == 'p' || key == 'P' || key == ENTER || key == RETURN)) {
     switch (key) {
       // moving
       case 'w': case 'W': pressUp(); return;
       case 'a': case 'A': pressLeft(); return;
       case 's': case 'S': pressDown(); return;
       case 'd': case 'D': pressRight(); return;
+      case ENTER: case RETURN:
+        started = true;
+        map.paused = false;
+        return;
       case CODED: // arrow keys
         switch(keyCode) {
           case UP: pressUp(); return;
@@ -28,7 +32,7 @@ void keyPressed() {
 }
 
 void keyReleased() {
-  if (player.stun_timer == 0) {
+  if (player.mode != Mode.DEAD && player.stun_timer == 0) {
     switch (key) {
       // moving
       case 'w': case 'W': releaseUp(); return;
@@ -52,7 +56,7 @@ void keyReleased() {
 
 private void pressUp() {
   w_pressed = true;
-  if (!(map.gravity == true && !verticalTileCollision(player.x, player.y, player.w / 2, player.h / 2, 1))) {
+  if (!(map.gravity == true && !verticalTileCollision(player.x, player.y, player.image.width / 2, player.image.height / 2, 1))) {
     player.yd = YDir.UP;
     player.yv = -1;
     if (map.gravity == true) player.yspd = player.jmp / 6;
@@ -71,6 +75,8 @@ private void pressLeft() {
   a_pressed = true;
   if (player.walljump == true) {
     player.xd = XDir.LEFT;
+//    if (map.gravity == true) player.image = player.left;
+    player.image = player.left;
     player.xv = -1;
   }
 }
@@ -78,8 +84,14 @@ private void pressLeft() {
 private void releaseLeft() {
   a_pressed = false;
   if (player.walljump == true) {
-    if (d_pressed) player.xv = 1;
-    else player.xv = 0;
+    if (d_pressed) {
+      player.image = player.right;
+      player.xv = 1;
+    } else {
+//      if (verticalTileCollision(player.x, player.y, player.image.width / 2, player.image.height / 2, 1))
+        player.image = player.center;
+      player.xv = 0;
+    }
   }
 }
 
@@ -98,7 +110,7 @@ private void releaseDown() {
   if (map.gravity == false) {
     if (w_pressed) player.yv = -1;
     else player.yv = 0;
-  } else {
+  } else if (player.yd == YDir.CENTER) {
     player.mode = Mode.STANDING;
   }
 }
@@ -107,6 +119,8 @@ private void pressRight() {
   d_pressed = true;
   if (player.walljump == true) {
     player.xd = XDir.RIGHT;
+//    if (map.gravity == true) player.image = player.right;
+    player.image = player.right;
     player.xv = 1;
   }
 }
@@ -114,8 +128,14 @@ private void pressRight() {
 private void releaseRight() {
   d_pressed = false;
   if (player.walljump == true) {
-    if (a_pressed) player.xv = -1;
-    else player.xv = 0;
+    if (a_pressed) {
+      player.image = player.left;
+      player.xv = -1;
+    } else {
+//      if (verticalTileCollision(player.x, player.y, player.image.width / 2, player.image.height / 2, 1))
+        player.image = player.center;
+      player.xv = 0;
+    }
   }
 }
 
