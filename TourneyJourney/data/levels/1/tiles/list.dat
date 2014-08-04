@@ -1,0 +1,13 @@
+12
+transparent, true, false, false
+grass_center, false, false, false
+grass_top, false, false, false
+door, true, false, true
+oak_left, true, false, false
+oak_center, true, false, false
+oak_right, true, false, false
+bush_left, true, false, false
+bush_center, true, false, false
+bush_right, true, false, false
+tree_center, false, false, false
+tree_bottom, false, false, false

@@ -1,0 +1,23 @@
+Images
+  Backgrounds
+    Forest		http://www.desktopwallpaperhd.net/wallpapers/11/e/house-forest-wallpaper-photo-tree-111358.jpg
+    City		http://204187957.r.cdn77.net/wp-content/uploads/2013/07/city-at-night-live-wallpaper-97.jpg
+    Cavern		http://ewkn.deviantart.com/art/Underworld-123444067
+    Hell		http://digital-art-gallery.com/picture/13415
+    Space		http://img.gawkerassets.com/img/18ua10p20frxujpg/k-bigpic.jpg
+  Tiles
+    Crate		http://opengameart.org/content/cartoon-wooden-crate
+    Grass		opengameart.org/content/tilesheet
+    Cobblestone		http://www.pixeljoint.com/forum/forum_posts.asp?TID=16498
+  HUD
+    Skull		http://opengameart.org/content/gold-skull
+    Hourglass		http://www.pixeljoint.com/pixelart/60610.htm
+    Winrar		http://winrarisyouplz.deviantart.com/art/A-Winrar-is-you-137674136
+    Star		http://opengameart.org/content/star
+Audio
+  Music
+    Glorius_Morning	http://www.newgrounds.com/audio/listen/91476
+    the-fight		http://www.newgrounds.com/audio/listen/555650
+Monsters
+  Bear			http://spritedatabase.net/file/12600
+  Dog			http://spritedatabase.net/file/4040
